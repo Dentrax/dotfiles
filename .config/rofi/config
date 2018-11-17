@@ -1,0 +1,19 @@
+rofi.separator-style: none
+rofi.hide-scrollbar: true
+
+rofi.font: Scientifica 11
+rofi.bw: 0
+rofi.padding: 450
+rofi.fullscreen: true
+
+rofi.color-enabled: true
+rofi.color-window: #90000000, 0, 0, 0, 0
+rofi.color-normal: 0, #FFFFFF, 0, 0, #BB333F
+rofi.color-active: 0, #b48ead, 0, 0, #93e5cc
+rofi.color-urgent: #2f343f, #ebcb8b, #2f343f, #2f343f, #ebcb8b   
+
+
+rofi.lines: 5
+rofi.eh: 2
+rofi.width: 100
+rofi.columns: 2
