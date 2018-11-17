@@ -1,0 +1,78 @@
+# ====================================================
+# AMX_Manager Copyright(C) 2018 Furkan Türkal
+# This program comes with ABSOLUTELY NO WARRANTY; This is free software,
+# and you are welcome to redistribute it under certain conditions; See
+# file LICENSE, which is part of this source code package, for details.
+# ====================================================
+
+#!/bin/bash
+
+HOME_WALLPAPER=/home/dentrax/Pictures/Wallpapers
+
+# Check for required applications
+command -v notify-send  >/dev/null 2>&1 || { echo >&2 "AMX_Wallpaper: I require 'notify-send' but it's not installed! Aborting.";   exit 1; }
+command -v feh          >/dev/null 2>&1 || { echo >&2 "AMX_Wallpaper: I require 'feh' but it's not installed! Aborting.";           exit 1; }
+
+main() {
+
+    case "$1" in
+        default)
+            hsetroot -fill ~/Pictures/Wallpapers/default.jpg
+            notify-send -a 'AMX_Wallpaper' -u low 'Wallpaper changed to default'
+            ;;
+        select)
+            wallpaper="/home/dentrax/Pictures/Wallpapers/wp$2.jpg"
+            check2="~/Pictures/Wallpapers/wp$2.jpg"
+            if [ -f "$wallpaper" ]
+            then
+                hsetroot -fill $wallpaper -blur 0 -tint 0 -sharpen 0
+                # feh --bg-fill $wallpaper
+                notify-send -a 'AMX_Wallpaper' -u low "Wallpaper changed to $2"
+            else
+                notify-send -a 'AMX_Wallpaper' -u low "Wallpaper $2 not found on: $check2"
+            fi
+            ;;
+        solid)
+            case "$2" in
+                red)
+                    hsetroot -solid '#FF0000'
+                ;;
+                green)
+                    hsetroot -solid '#008000'
+                ;;
+                blue)
+                    hsetroot -solid '#0000FF'
+                ;;
+                gray)
+                    hsetroot -solid '#333333'
+                ;;
+                black)
+                    hsetroot -solid '#000000'
+                ;;
+                *)
+                    printf "amx_set-wallpaper solid <command>\n"
+                    printf "                        red\n"
+                    printf "                        green\n"
+                    printf "                        blue\n"
+                    printf "                        gray\n"
+
+                esac
+            
+            ;;
+        random)
+            random_wp=$(find "${HOME_WALLPAPER}" -type f | sort -R | head -1)
+            feh --bg-scale "${random_wp}"
+            notify-send -a 'AMX_Wallpaper' -u low 'Wallpaper changed to random'
+            ;;
+
+        *)
+            printf "amx_set-wallpaper <command>\n"
+            printf "                  default\n"
+            printf "                  select\n"
+            printf "                  solid\n"
+            printf "                  random\n"
+
+        esac
+}
+
+main "$@"

@@ -1,0 +1,45 @@
+# ====================================================
+# AMX_Manager Copyright(C) 2018 Furkan Türkal
+# This program comes with ABSOLUTELY NO WARRANTY; This is free software,
+# and you are welcome to redistribute it under certain conditions; See
+# file LICENSE, which is part of this source code package, for details.
+# ====================================================
+
+#!/bin/bash
+
+# Check for required applications
+command -v notify-send  >/dev/null 2>&1 || { echo >&2 "AMX_Wallpaper: I require 'notify-send' but it's not installed! Aborting.";   exit 1; }
+command -v xrandr  		>/dev/null 2>&1 || { echo >&2 "AMX_Wallpaper: I require 'xrandr' but it's not installed! Aborting.";   		exit 1; }
+
+if [[ -z "$@" ]];
+then
+	echo "An argument is needed to run this script";
+	exit
+else
+	arg="$@"
+
+	if [[ $(($(echo $arg | grep -o "\s" | wc --chars) / 2 )) -ne 2 ]];
+	then
+	echo "Invalid Parameters. You need to specify parameters in the format "width height refreshRate""
+	echo "For example setResolution "2560 1440 60""
+	exit
+	fi
+
+	modename=$(echo $arg | sed 's/\s/_/g')
+	display=$(xrandr | grep -Po '.+(?=\sconnected)')
+	
+	if [[ "$(xrandr|grep $modename)" = "" ]];
+	then
+		xrandr --newmode $modename $(gtf $(echo $arg) | grep -oP '(?<="\s\s).+') &&
+		xrandr --addmode $display $modename
+	fi
+	
+	xrandr --output $display --mode $modename
+
+	if [[ $? -eq 0 ]];
+	then
+		notify-send -a 'AMX_Resolution' -u low 'Display resolution changed'
+		echo "Display changed successfully to $arg"
+	fi
+fi
+

@@ -1,0 +1,37 @@
+# ====================================================
+# AMX_Manager Copyright(C) 2018 Furkan Türkal
+# This program comes with ABSOLUTELY NO WARRANTY; This is free software,
+# and you are welcome to redistribute it under certain conditions; See
+# file LICENSE, which is part of this source code package, for details.
+# ====================================================
+
+#!/bin/bash
+
+# Check for required applications
+command -v notify-send  >/dev/null 2>&1 || { echo >&2 "AMX_WMCtrl: I require 'notify-send' but it's not installed! Aborting.";   exit 1; }
+command -v wmctrl       >/dev/null 2>&1 || { echo >&2 "AMX_WMCtrl: I require 'wmctrl' but it's not installed! Aborting.";        exit 1; }
+
+main() {
+
+    case "$1" in
+        close)
+            wmctrl -c :ACTIVE:
+            notify-send -a 'AMX_WMCtrl' -u low 'Active window closed'
+            ;;
+        minify)
+            wmctrl -r :ACTIVE: -b toggle,hidden
+            notify-send -a 'AMX_WMCtrl' -u low 'Active window minified'
+            ;;
+        maximize)
+            wmctrl -r :ACTIVE: -b toggle,maximized_vert,maximized_horz
+            notify-send -a 'AMX_WMCtrl' -u low 'Active window maximized'
+            ;;
+        *)
+            printf "amx_wmctrl <command>\n"
+            printf "           close\n"
+            printf "           minify\n"
+            printf "           maximize\n"
+       esac
+}
+
+main "$@"

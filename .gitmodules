@@ -1,0 +1,3 @@
+[submodule "AMX_Manager"]
+	path = AMX_Manager
+	url = https://github.com/Dentrax/AMX_Manager

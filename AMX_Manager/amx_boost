@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# ====================================================
+# AMX_Manager Copyright(C) 2018 Furkan Türkal
+# This program comes with ABSOLUTELY NO WARRANTY; This is free software,
+# and you are welcome to redistribute it under certain conditions; See
+# file LICENSE, which is part of this source code package, for details.
+# ====================================================
+
+# Reference -> https://gist.github.com/pklaus/837023
+
+ICON_RAM='/usr/share/icons/gnome/32x32/status/stock_dialog-info.png'
+
+# Check for required applications
+command -v notify-send >/dev/null 2>&1 || { echo >&2 "AMX_Boost: I require 'notify-send' but it's not installed! Aborting.";   exit 1; }
+command -v sudo        >/dev/null 2>&1 || { echo >&2 "AMX_Boost: I require 'sudo' but it's not installed! Aborting.";          exit 1; }
+command -v sync        >/dev/null 2>&1 || { echo >&2 "AMX_Boost: I require 'sync' but it's not installed! Aborting.";          exit 1; }
+
+if [ "$(whoami)" != "root" ]; then
+  echo "You have to run this script as Root!"
+  exit 1
+fi
+
+function boost_RAM() {
+  # Get Memory Information
+  memory_total=$(cat /proc/meminfo | grep MemTotal | tr -s ' ' | cut -d ' ' -f2) && memory_total=$(echo "$memory_total/1024.0" | bc)
+  memory_free_before=$(cat /proc/meminfo | grep MemFree | tr -s ' ' | cut -d ' ' -f2) && memory_free_before=$(echo "$memory_free_before/1024.0" | bc)
+  memory_cached_before=$(cat /proc/meminfo | grep "^Cached" | tr -s ' ' | cut -d ' ' -f2) && memory_cached_before=$(echo "$memory_cached_before/1024.0" | bc)
+
+  # Output Information
+  echo -e "[RAM] Boost operation starting..."
+  echo -e "Cached : $memory_cached_before MiB" 
+  echo -e "Free   : $memory_free_before MiB"
+
+  # Test sync
+  if [ "$?" != "0" ]
+  then
+    echo "Something went wrong!"
+    exit 1
+  fi
+
+  # Clear Filesystem Buffer using "sync" and Clear Caches
+  sync && echo 3 > /proc/sys/vm/drop_caches
+
+  memory_free_after=$(cat /proc/meminfo | grep MemFree | tr -s ' ' | cut -d ' ' -f2) && memory_free_after=$(echo "$memory_free_after/1024.0" | bc)
+
+  # Output Summary
+  percentage_free_before=$((100 * $memory_free_before / $memory_total))
+  percentage_free_after=$((100 * $memory_free_after / $memory_total))
+  percentage_freed=$(($percentage_free_after - $percentage_free_before))
+
+  echo -e "[RAM] Boost operation completed successfully!"
+  echo -e "Freed : (%$percentage_freed) -> $(echo "$memory_free_after - $memory_free_before" | bc) MiB " 
+  echo -e "Free  : $memory_free_after MiB"
+
+  DISPLAY=:0.0 su $USER -c "/usr/bin/notify-send -i "$ICON_RAM" -a 'AMX_Boost' -u normal 'RAM Boosted (percentage_freed)'"
+}
+
+function boost_TEMP() {
+  echo -e "...SOON..."
+  exit 2
+}
+
+function boost_CACHE() {
+  echo -e "...SOON..."
+  exit 2
+}
+
+main() {
+  case "$1" in
+        ram)
+            boost_RAM
+            ;;
+        temp) 
+            boost_TEMP
+            ;;
+        cache)
+            boost_CACHE
+            ;;
+        *)
+            printf "amx_boost <command>\\n"
+            printf "          ram\\n"
+            printf "          temp\\n"
+            printf "          cache\\n"
+
+        esac
+}
+
+main "$@"
+

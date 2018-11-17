@@ -1,0 +1,55 @@
+# ====================================================
+# AMX_Manager Copyright(C) 2018 Furkan Türkal
+# This program comes with ABSOLUTELY NO WARRANTY; This is free software,
+# and you are welcome to redistribute it under certain conditions; See
+# file LICENSE, which is part of this source code package, for details.
+# ====================================================
+
+#!/bin/bash
+
+ICON_MOUSE=/usr/share/icons/Papirus/64x64/devices/input-mouse.svg
+ICON_TOUCHPAD=/usr/share/icons/Papirus/64x64/devices/input-touchpad.svg
+
+# Check for required applications
+command -v notify-send  >/dev/null 2>&1 || { echo >&2 "AMX_Wallpaper: I require 'notify-send' but it's not installed! Aborting.";   exit 1; }
+command -v xinput       >/dev/null 2>&1 || { echo >&2 "AMX_Wallpaper: I require 'xinput' but it's not installed! Aborting.";        exit 1; }
+command -v synclient    >/dev/null 2>&1 || { echo >&2 "AMX_Wallpaper: I require 'synclient' but it's not installed! Aborting.";     exit 1; }
+
+main() {
+
+    case "$1" in
+        toggle)      
+            declare -i ID
+            ID=`xinput list | grep -Eio '(touchpad|glidepoint)\s*id\=[0-9]{1,2}' | grep -Eo '[0-9]{1,2}'`
+            declare -i STATE
+            STATE=`xinput list-props $ID|grep 'Device Enabled'|awk '{print $4}'`
+            if [ $STATE -eq 1 ]
+            then
+                xinput disable $ID
+                echo "Touchpad disabled."
+                notify-send -a 'AMX_Touchpad' 'Disabled' -i /usr/share/icons/Adwaita/48x48/devices/input-touchpad.png
+            else
+                xinput enable $ID
+                echo "Touchpad enabled."
+                notify-send -a 'AMX_Touchpad' 'Enabled' -i /usr/share/icons/Papirus/48x48/devices/input-touchpad.svg
+            fi
+
+            ;;
+        auto)
+            if [ $(ls /dev/input | grep mouse | wc -l) -gt 1 ]; then
+                synclient TouchpadOff=1
+                notify-send -a 'AMX_Touchpad' -u low 'Mouse Mod; Touchpad Disabled' -i $ICON_MOUSE
+            else
+                synclient TouchpadOff=0
+                notify-send -a 'AMX_Touchpad' -u low 'Touchpad Mod; Mouse Disabled' -i $ICON_TOUCHPAD
+            fi 
+            ;;
+        *)
+            printf "touchpad <command>\n"
+            printf "         toggle \n"
+            printf "         auto \n"
+
+        esac
+}
+
+main "$@"

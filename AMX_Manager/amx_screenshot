@@ -1,0 +1,68 @@
+# ====================================================
+# AMX_Manager Copyright(C) 2018 Furkan Türkal
+# This program comes with ABSOLUTELY NO WARRANTY; This is free software,
+# and you are welcome to redistribute it under certain conditions; See
+# file LICENSE, which is part of this source code package, for details.
+# ====================================================
+
+#!/bin/bash
+
+TMP=/tmp/screenshot.png
+FILE_FORMAT='%Y-%m-%d_%H.%M.%S.png'
+FOLDER_DESTINATION='/home/dentrax/Pictures/Screenshots'
+ICON_SUCCESS='/usr/share/icons/gnome/32x32/status/stock_dialog-info.png'
+ICON_FAILURE='/usr/share/icons/gnome/32x32/status/stock_dialog-error.png'
+
+# Check for required applications
+command -v notify-send >/dev/null 2>&1 || { echo >&2 "AMX_Screenshot: I require 'notify-send' but it's not installed! Aborting.";   exit 1; }
+command -v xclip       >/dev/null 2>&1 || { echo >&2 "AMX_Screenshot: I require 'xclip' but it's not installed! Aborting.";         exit 1; }
+
+# Check if icons exist
+if [ ! -f "$ICON_SUCCESS" ]; then echo >&2 'Missing success icon: '"$ICON_SUCCESS"; exit 2; fi
+if [ ! -f "$ICON_FAILURE" ]; then echo >&2 'Missing failure icon: '"$ICON_FAILURE"; exit 2; fi
+
+function fail {
+  notify-send -a 'AMX_Screenshot' 'Screenshot failed'  
+  exit
+}
+
+main() {
+
+    # It's screenshot time!
+
+    case "$1" in
+        full)
+            scrot -z -q 100 $FOLDER_DESTINATION/$FILE_FORMAT 1>/dev/null 2>&1          
+            notify-send -i "$FAILURE_ICON" -a 'AMX_Screenshot' 'Screenshot captured (copied to Clipboard)'
+            ;;
+        select)
+            scrot -s -z -q 100 $FOLDER_DESTINATION/$FILE_FORMAT 1>/dev/null 2>&1
+            feh --randomize --bg-fill ~/Pictures/Wallpapers/*
+            notify-send -a 'AMX_Wallpaper' 'Screenshot captured (copied to Clipboard)'
+            ;;
+        focus)
+            scrot -u -z -q 100 $FOLDER_DESTINATION/$FILE_FORMAT 1>/dev/null 2>&1
+            notify-send -a 'AMX_Screenshot' 'Screenshot captured (copied to Clipboard)'
+            ;;
+        *)
+            printf "amx_screenshot <command>\n"
+            printf "         full\n"
+            printf "         select\n"
+            printf "         focus\n"
+
+        esac
+
+        FILE_LATEST=$(ls -t $FOLDER_DESTINATION | head -1)
+        echo "Output directory: $FOLDER_DESTINATION"
+        echo "Screenshot: $FILE_LATEST"
+
+        xclip -selection clipboard -t image/png -i < "$FOLDER_DESTINATION/$FILE_LATEST"
+
+        if [ $? -ne 0 ]; then
+            notify-send -u low -i "$FAILURE_ICON" -a 'AMX_Screenshot' 'Screenshot failed'
+            exit
+        fi
+}
+
+main "$@"
+
