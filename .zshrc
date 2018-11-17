@@ -82,6 +82,4 @@ source ~/.zsh/ssh.zsh
 #source /usr/bin/az.completion.sh >/dev/null
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias config='/usr/bin/git --git-dir=/home/dentrax/.cfg/ --work-tree=/home/dentrax'
-alias config='/usr/bin/git --git-dir=/home/dentrax/.cfg/ --work-tree=/home/dentrax'
 alias dotfiles='/usr/bin/git --git-dir=/home/dentrax/.dotfiles/ --work-tree=/home/dentrax'
