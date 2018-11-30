@@ -243,6 +243,9 @@ bindsym XF86MonBrightnessDown exec --no-startup-id /usr/local/bin/amx_set-light 
 # Kill focused window
 bindsym $mod+q kill
 
+# Kill (Force) focused window
+bindsym $mod+w xkill
+
 # Split (v)
 bindsym $mod+Shift+v split h
 bindsym $mod+v split v

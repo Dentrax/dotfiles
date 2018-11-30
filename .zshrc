@@ -2,6 +2,10 @@
 export ANDROID_HOME=~/android
 export ANDROID_SDK_HOME=~/android
 export GOPATH=~/Projects/go
+export GOROOT=/usr/lib/go
+export PATH=$PATH:~/Projects/go/bin
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:/opt/bin
