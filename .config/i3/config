@@ -42,7 +42,7 @@ mode "$EXECUTE" {
 	# Programs
 	bindsym e mode "$EXECUTE_EDITOR"
 	bindsym i mode "$EXECUTE_IDE"
-	
+
 	bindsym t exec thunar /home/dentrax,						mode "default"
 	bindsym a exec /usr/local/bin/amx_start android-emulator,	mode "default"
 	bindsym c exec /usr/local/bin/amx_start chromium,			mode "default"
@@ -65,6 +65,7 @@ mode "$EXECUTE_EDITOR" {
 	# Programs
 	bindsym e exec /usr/local/bin/amx_start emacs,		mode "default"
 	bindsym a exec /usr/bin/atom,						mode "default"
+	bindsym s exec /usr/bin/subl3,						mode "default"
 
   	# back to normal: Enter or Escape
   	bindsym Return mode "default"
@@ -589,6 +590,7 @@ for_window	[class="copyq"]						floating enable
 for_window	[class="Peek"]						floating enable
 for_window	[class="Rofi"]						floating enable
 for_window	[class="Steam" instance="Steam"]	floating enable
+for_window	[title="^Android Emulator -"]		floating enable, sticky disable, title_format "Android Emulator"
 for_window	[class="Google-chrome"]				move container to $workspace2, title_format "Google Chrome"
 for_window	[class="Chromium"]					move container to $workspace2, title_format "Chromium"
 for_window	[class="Wire"]						move container to $workspace3
