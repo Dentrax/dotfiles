@@ -42,10 +42,11 @@ mode "$EXECUTE" {
 	# Programs
 	bindsym e mode "$EXECUTE_EDITOR"
 	bindsym i mode "$EXECUTE_IDE"
-	bindsym t exec thunar /home/dentrax, 				mode "default"
-	bindsym c exec /usr/local/bin/amx_start chromium,	mode "default"
-	bindsym f exec /usr/local/bin/amx_start firefox, 	mode "default"
-	bindsym m exec /usr/local/bin/amx_start mailspring, mode "default"
+	bindsym t exec thunar /home/dentrax, 						mode "default"
+	bindsym a exec /usr/local/bin/amx_start android-emulator,	mode "default"
+	bindsym c exec /usr/local/bin/amx_start chromium,			mode "default"
+	bindsym f exec /usr/local/bin/amx_start firefox, 			mode "default"
+	bindsym m exec /usr/local/bin/amx_start mailspring, 		mode "default"
 
   	# back to normal: Enter or Escape
   	bindsym Return mode "default"
@@ -79,6 +80,7 @@ mode "$EXECUTE_IDE" {
 	# Programs
 	bindsym a exec /usr/bin/arduino,	mode "default"
 	bindsym c exec /usr/bin/code,		mode "default"
+	bindsym q exec /usr/bin/qtcreator,	mode "default"
 
   	# back to normal: Enter or Escape
   	bindsym Return mode "default"
@@ -244,7 +246,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id /usr/local/bin/amx_set-light 
 bindsym $mod+q kill
 
 # Kill (Force) focused window
-bindsym $mod+w xkill
+bindsym $mod+Shift+q xkill
 
 # Split (v)
 bindsym $mod+Shift+v split h
