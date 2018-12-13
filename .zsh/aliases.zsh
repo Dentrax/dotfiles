@@ -19,9 +19,6 @@ alias quote-online="~/.config/conky/sidekick/res/quote-online"
 alias downmp3='f() { youtube-dl -o "~/Music/%(title)s.%(ext)s" --extract-audio --audio-format mp3 $1 };f'
 alias amx_update="sudo pacman -Syu"
 alias amx_add="sudo pacman -S"
-alias q="exit"
-alias zls='ls -lah | lolcat'
-alias ls="exa --git --group-directories-first -lahGFm"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -40,9 +37,13 @@ alias strc="awk '!/^ *#/ && NF'"
 alias dmesg='clear; dmesg -eL -w'
 alias c='clear'
 alias cat='bat '
+alias q="exit"
+alias l="/usr/bin/ls "
+alias tls='/usr/bin/ls -lah | lolcat'
+alias ls="exa --git --group-directories-first -lahGFm"
 
 # cmake
-alias cmc='find . -name 'CMakeCache.txt' -o -name '*.cmake' -o -name 'Makefile' -o -name 'CMakeFiles' -exec rm -rf {} +'
+alias cmc='find . -name "CMakeCache.txt" -o -name "*.cmake" -o -name "Makefile" -o -name "CMakeFiles" -exec rm -rf {} +'
 
 rm_WTF() {
    echo "WTF BRO?" >&2
