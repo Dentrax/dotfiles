@@ -80,9 +80,12 @@ mode "$EXECUTE_EDITOR" {
 set $EXECUTE_IDE i3-EXECUTE-IDE
 mode "$EXECUTE_IDE" {
 	# Programs
-	bindsym a exec /usr/bin/arduino,	mode "default"
-	bindsym c exec /usr/bin/code,		mode "default"
-	bindsym q exec /usr/bin/qtcreator,	mode "default"
+	bindsym a exec /usr/bin/arduino,				mode "default"
+	bindsym c exec /usr/bin/code,					mode "default"
+	bindsym q exec /usr/bin/qtcreator,				mode "default"
+	bindsym p exec /usr/bin/processing,				mode "default"
+	bindsym s exec /usr/local/bin/amx_start spyder,	mode "default"
+	bindsym w exec /usr/bin/mysql-workbench,		mode "default"
 
   	# back to normal: Enter or Escape
   	bindsym Return mode "default"
