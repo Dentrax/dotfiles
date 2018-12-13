@@ -45,6 +45,9 @@ alias ls="exa --git --group-directories-first -lahGFm"
 # cmake
 alias cmc='find . -name "CMakeCache.txt" -o -name "*.cmake" -o -name "Makefile" -o -name "CMakeFiles" -exec rm -rf {} +'
 
+# Go
+alias gg='go get -u -v '
+
 rm_WTF() {
    echo "WTF BRO?" >&2
    echo "Seriously?" >&2
