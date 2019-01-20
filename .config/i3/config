@@ -83,8 +83,10 @@ mode "$EXECUTE_IDE" {
 	bindsym a exec /usr/bin/arduino,				mode "default"
 	bindsym c exec /usr/bin/code,					mode "default"
 	bindsym q exec /usr/bin/qtcreator,				mode "default"
-	bindsym p exec /usr/bin/processing,				mode "default"
+	bindsym r exec /usr/bin/processing,				mode "default"
+	bindsym p exec /usr/bin/pycharm,				mode "default"
 	bindsym s exec /usr/local/bin/amx_start spyder,	mode "default"
+	bindsym g exec /usr/bin/pgadmin4,		mode "default"
 	bindsym w exec /usr/bin/mysql-workbench,		mode "default"
 
   	# back to normal: Enter or Escape
@@ -119,11 +121,11 @@ bindsym $win+Print mode "$SCREENSHOT"
 set $RANGER i3-RANGER
 mode "$RANGER" {
 	# Rangers
-	bindsym p exec --no-startup-id ranger ~/Projects, 			mode "default"
-	bindsym P exec /usr/local/bin/amx_start ranger pictures, 	mode "default"
-	bindsym d exec /usr/local/bin/amx_start ranger documents,	mode "default"
-	bindsym D exec /usr/local/bin/amx_start ranger downloads,	mode "default"
-	bindsym m exec /usr/local/bin/amx_start ranger music,		mode "default"
+	bindsym p exec --no-startup-id termite -e "ranger ~/Projects", 			    mode "default"
+	bindsym P exec termite -e "/usr/local/bin/amx_start ranger pictures", 	mode "default"
+	bindsym d exec termite -e "/usr/local/bin/amx_start ranger documents",	mode "default"
+	bindsym D exec termite -e "/usr/local/bin/amx_start ranger downloads",	mode "default"
+	bindsym m exec termite -e "/usr/local/bin/amx_start ranger music",	  	mode "default"
 
   	# back to normal: Enter or Escape
   	bindsym Return mode "default"
