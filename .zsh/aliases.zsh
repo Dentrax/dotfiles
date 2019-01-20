@@ -30,23 +30,27 @@ alias sudo='sudo -ES '
 alias watch='watch '
 
 # misc
-alias df='df -h -T | grep -v tmpfs'
-alias du='du -h --max-depth=1 | sort -hr'
+#alias df='df -h -T | grep -v tmpfs'
+#alias du='du -h --max-depth=1 | sort -hr'
 alias lsblk='lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL,UUID'
 alias strc="awk '!/^ *#/ && NF'"
 alias dmesg='clear; dmesg -eL -w'
 alias c='clear'
 alias cat='bat '
 alias q="exit"
-alias l="/usr/bin/ls "
+#alias l="/usr/bin/ls "
 alias tls='/usr/bin/ls -lah | lolcat'
 alias ls="exa --git --group-directories-first -lahGFm"
+alias l="lsd -a"
 
 # cmake
 alias cmc='find . -name "CMakeCache.txt" -o -name "*.cmake" -o -name "Makefile" -o -name "CMakeFiles" -exec rm -rf {} +'
 
 # Go
 alias gg='go get -u -v '
+
+# Git
+alias gito='chromium https://github.$(git config remote.origin.url | cut -f2 -d. | tr ':' /)'
 
 rm_WTF() {
    echo "WTF BRO?" >&2
