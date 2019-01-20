@@ -8,6 +8,7 @@ export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:/usr/bin/python3.6
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:/opt/bin
 export PATH=$PATH:/opt/protoc-3.6.1/bin
@@ -17,17 +18,19 @@ export PATH=$PATH:/usr/sbin
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/root/bin
 
+source ~/.zsh/exports.zsh
+
 # Path to your oh-my-zsh installation.,
 export ZSH=/home/dentrax/.oh-my-zsh
 
-ZSH_THEME="agnoster"
+#ZSH_THEME="agnoster"
 
 #GEOMETRY_SYMBOL_PROMPT=""
 
 plugins=(
   git
 )
-source ~/Projects/GitHub/geometry/geometry.zsh
+#source ~/Projects/GitHub/geometry/geometry.zsh
 #source ~/Projects/GitHub/agnoster-zsh-theme/agnoster.zsh-theme
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -76,6 +79,7 @@ source ~/.zsh/antigen.zsh
 source ~/.zsh/opts.zsh
 #source ~/.zsh/keybindings.zsh
 source ~/.zsh/aliases.zsh
+source ~/.zsh/funcs.zsh
 #source ~/.zsh/pacman.zsh
 #source ~/.zsh/kubectl.zsh
 #source ~/.zsh/git.zsh
