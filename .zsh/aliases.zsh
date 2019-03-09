@@ -52,6 +52,12 @@ alias gg='go get -u -v '
 # Git
 alias gito='chromium https://github.$(git config remote.origin.url | cut -f2 -d. | tr ':' /)'
 
+# Upload
+fup() {
+    [[ "$1" ]] || { echo "Error: Missing file" >&2; return 1; }
+    curl -F "file=@$1" "https://0x0.st"
+}
+
 rm_WTF() {
    echo "WTF BRO?" >&2
    echo "Seriously?" >&2

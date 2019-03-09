@@ -1,23 +1,3 @@
-#export PATH=/home/dentrax/anaconda3/bin:$PATH
-export ANDROID_HOME=~/android
-export ANDROID_SDK_HOME=~/android
-export GOPATH=~/Projects/go
-export GOROOT=/usr/lib/go
-export PATH=$PATH:~/Projects/go/bin
-export PATH=$PATH:$GOROOT/bin
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:/usr/bin/python3.6
-export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:/opt/bin
-export PATH=$PATH:/opt/protoc-3.6.1/bin
-export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:/usr/local/sbin
-export PATH=$PATH:/usr/sbin
-export PATH=$PATH:/usr/bin
-export PATH=$PATH:/root/bin
-
 source ~/.zsh/exports.zsh
 
 # Path to your oh-my-zsh installation.,

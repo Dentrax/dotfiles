@@ -85,6 +85,7 @@ mode "$EXECUTE_IDE" {
 	bindsym q exec /usr/bin/qtcreator,				mode "default"
 	bindsym r exec /usr/bin/processing,				mode "default"
 	bindsym p exec /usr/bin/pycharm,				mode "default"
+	bindsym u exec /usr/bin/staruml,				mode "default"
 	bindsym s exec /usr/local/bin/amx_start spyder,	mode "default"
 	bindsym g exec /usr/bin/pgadmin4,		mode "default"
 	bindsym w exec /usr/bin/mysql-workbench,		mode "default"
@@ -225,6 +226,25 @@ mode "$NETWORK_ETHERHET" {
   	bindsym Return mode "default"
   	bindsym Escape mode "default"
 }
+
+# ===============================================================
+# MODE - POWER
+# ===============================================================
+
+# Network
+set $POWER i3-POWER
+mode "$POWER" {
+	# Network
+	bindsym h exec /usr/local/bin/amx_power shutdown, 			mode "default"
+	bindsym s exec /usr/local/bin/amx_power sleep, 			mode "default"
+	bindsym r exec /usr/local/bin/amx_power reboot, 			mode "default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $win+Shift+p mode "$POWER"
 
 # ===============================================================
 # BINDS
@@ -416,6 +436,7 @@ mode "$FOCUS" {
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
+
 bindsym $win+f mode "$FOCUS"
 
 # ===============================================================
