@@ -64,6 +64,7 @@ set $EXECUTE_EDITOR i3-EXECUTE-EDITOR
 mode "$EXECUTE_EDITOR" {
 	# Programs
 	bindsym e exec /usr/local/bin/amx_start emacs,		mode "default"
+	bindsym g exec /usr/local/bin/amx_start godot,		mode "default"
 	bindsym a exec /usr/bin/atom,						mode "default"
 	bindsym s exec /usr/bin/subl3,						mode "default"
 
@@ -613,6 +614,7 @@ for_window	[title="^floatme$"]					floating enable
 for_window	[window_role="pop-up"]				floating enable
 for_window	[class="Pinentry"]					floating enable
 for_window	[class="copyq"]						floating enable
+for_window	[class="Godot"]						floating enable
 for_window	[class="Peek"]						floating enable
 for_window	[class="Rofi"]						floating enable
 for_window	[class="Steam" instance="Steam"]	floating enable
