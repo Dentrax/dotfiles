@@ -14,6 +14,8 @@ _   _  ____      ____  ____  _  _  ____  ____    __    _  _
 
 " && 
 date +%A%n%x | figlet &&
-neofetch
+neofetch &&
+sleep 1 &&
+startx ~/.xinitrc i3
 
 export PATH="$HOME/.cargo/bin:$PATH"
