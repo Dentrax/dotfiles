@@ -36,6 +36,7 @@ alias lsblk='lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL,UUID'
 alias strc="awk '!/^ *#/ && NF'"
 alias dmesg='clear; dmesg -eL -w'
 alias c='clear'
+alias r='tput reset'
 alias cat='bat '
 alias q="exit"
 #alias l="/usr/bin/ls "
@@ -51,6 +52,7 @@ alias gg='go get -u -v '
 
 # Git
 alias gito='chromium https://github.$(git config remote.origin.url | cut -f2 -d. | tr ':' /)'
+alias gitl='git log --all --decorate --oneline --graph'
 
 # Upload
 fup() {
