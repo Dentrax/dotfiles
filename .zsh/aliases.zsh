@@ -17,6 +17,7 @@ alias hist='history | grep'
 alias quote="~/.config/conky/sidekick/res/quote-offline"
 alias quote-online="~/.config/conky/sidekick/res/quote-online"
 alias downmp3='f() { youtube-dl -o "~/Music/%(title)s.%(ext)s" --extract-audio --audio-format mp3 $1 };f'
+alias gdate="curl -fs --head https://google.com | grep ^date: | sed 's/date: //g'"
 alias amx_update="sudo pacman -Syu"
 alias amx_add="sudo pacman -S"
 
