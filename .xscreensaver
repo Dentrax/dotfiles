@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.40 for dentrax on Wed Aug 22 12:30:20 2018.
+# Written by xscreensaver-demo 5.43 for dentrax on Thu Dec  5 22:56:04 2019.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:03:00
@@ -35,7 +35,7 @@ chooseRandomImages: False
 imageDirectory:	
 
 mode:		one
-selected:	16
+selected:	172
 
 textMode:	file
 textLiteral:	XScreenSaver
@@ -289,6 +289,9 @@ programs:								      \
 				filmleader -root			    \n\
 				glitchpeg -root				    \n\
 				vfeedback -root				    \n\
+  GL: 				handsy -root				    \n\
+  GL: 				deepstars -root				    \n\
+  GL: 				gravitywell -root			    \n\
 
 
 pointerPollTime:    0:00:05

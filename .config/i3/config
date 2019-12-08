@@ -29,8 +29,8 @@ bindcode Shift+50 exec "py3-cmd refresh keyboard_layout"
 bindcode Shift+62 exec "py3-cmd refresh keyboard_layout"
 
 # Start a terminal
-bindsym $win+t exec --no-startup-id /usr/local/bin/amx_start termite
-bindsym $win+Shift+t exec --no-startup-id termite /bin/bash
+bindsym $win+t exec --no-startup-id termite /bin/bash
+bindsym $win+Shift+t exec --no-startup-id alacritty
 
 # ===============================================================
 # MODE - EXECUTE
@@ -43,11 +43,11 @@ mode "$EXECUTE" {
 	bindsym e mode "$EXECUTE_EDITOR"
 	bindsym i mode "$EXECUTE_IDE"
 
-	bindsym t exec thunar /home/dentrax,						    mode "default"
+	bindsym t exec thunar /home/dentrax,                            mode "default"
 	bindsym a exec /usr/local/bin/amx_start android-emulator,       mode "default"
-	bindsym c exec /usr/local/bin/amx_start chromium,		  	    mode "default"
-	bindsym f exec /usr/local/bin/amx_start firefox,		  	    mode "default"
-	bindsym m exec /usr/local/bin/amx_start mailspring,			    mode "default"
+	bindsym c exec /usr/local/bin/amx_start chromium,		  	        mode "default"
+	bindsym f exec /usr/local/bin/amx_start firefox,		  	        mode "default"
+	bindsym m exec /usr/local/bin/amx_start mailspring,			        mode "default"
 
   	# back to normal: Enter or Escape
   	bindsym Return mode "default"
@@ -91,9 +91,76 @@ mode "$EXECUTE_IDE" {
 	bindsym g exec /usr/bin/pgadmin4,		mode "default"
 	bindsym w exec /usr/bin/mysql-workbench,		mode "default"
 
-  	# back to normal: Enter or Escape
-  	bindsym Return mode "default"
-  	bindsym Escape mode "default"
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $win+e mode "$EXECUTE"
+
+# ===============================================================
+# MODE - JOY
+# ===============================================================
+
+# Programs
+set $JOY i3-JOY
+mode "$JOY" {
+	# Programs
+    bindsym r mode "$JOY_RADIO"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $win+j mode "$JOY"
+
+# ===============================================================
+# MODE - JOY-RADIO
+# ===============================================================
+
+# Programs
+set $JOY_RADIO i3-JOY-RADIO
+mode "$JOY_RADIO" {
+	# Programs
+	bindsym 0 exec /usr/bin/mpc pause,		mode "default"
+	bindsym 1 exec /usr/bin/mpc play 1,		mode "default"
+	bindsym 2 exec /usr/bin/mpc play 2,		mode "default"
+	bindsym 3 exec /usr/bin/mpc play 3,		mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# ===============================================================
+# MODE - DOWNLOAD
+# ===============================================================
+
+# Programs
+set $DOWNLOAD i3-DOWNLOAD
+mode "$DOWNLOAD" {
+	# Programs
+    bindsym y mode "$DOWNLOAD_YOUTUBE"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $win+d mode "$DOWNLOAD"
+
+# ===============================================================
+# MODE - DOWNLOAD - YOUTUBE
+# ===============================================================
+
+# Programs
+set $DOWNLOAD_YOUTUBE i3-DOWNLOAD-YOUTUBE
+mode "$DOWNLOAD_YOUTUBE" {
+	# Programs
+	bindsym --release m exec /usr/local/bin/amx_download youtube-music, 	mode "default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
 # ===============================================================
@@ -204,6 +271,7 @@ mode "$NETWORK_WIFI" {
 	bindsym i exec /usr/local/bin/amx_wifi connect,		mode "default"
 	bindsym o exec /usr/local/bin/amx_wifi disconnect,	mode "default"
 	bindsym s exec /usr/local/bin/amx_wifi show-ui,		mode "default"
+	bindsym m exec /usr/local/bin/amx_wifi show-dmenu,	mode "default"
 
   	# back to normal: Enter or Escape
   	bindsym Return mode "default"
@@ -260,6 +328,7 @@ bindsym $win+l exec --no-startup-id betterlockscreen -l
 bindsym $win+$mod+l exec --no-startup-id betterlockscreen -s
 
 # Media keys
+bindsym XF86TouchpadToggle    exec --no-startup-id /usr/local/bin/amx_set-touchpad toggle
 bindsym XF86AudioMute         exec --no-startup-id /usr/local/bin/amx_set-volume toggle
 bindsym XF86AudioRaiseVolume  exec --no-startup-id /usr/local/bin/amx_set-volume up
 bindsym XF86AudioLowerVolume  exec --no-startup-id /usr/local/bin/amx_set-volume down
@@ -410,35 +479,15 @@ set $workspace8 "🌙"
 # WINDOW FOCUS
 # ===============================================================
 
-set $FOCUS i3-FOCUS
+bindsym $mod+43 focus left
+bindsym $mod+44 focus down
+bindsym $mod+45 focus up
+bindsym $mod+46 focus right
 
-mode "$FOCUS" {
-	# Change focus (h)(j)(k)(l)
-	bindcode $mod+43 focus left
-	bindcode $mod+44 focus down
-	bindcode $mod+45 focus up
-	bindcode $mod+46 focus right
-	bindsym $mod+Left focus left
-	bindsym $mod+Down focus down
-	bindsym $mod+Up focus up
-	bindsym $mod+Right focus right
-
-	# Move focused window (h)(j)(k)(l)
-	bindcode $mod+Shift+43 move left
-	bindcode $mod+Shift+44 move down
-	bindcode $mod+Shift+45 move up
-	bindcode $mod+Shift+46 move right
-	bindsym $mod+Shift+Left move left
-	bindsym $mod+Shift+Down move down
-	bindsym $mod+Shift+Up move up
-	bindsym $mod+Shift+Right move right
-
-	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-
-bindsym $win+f mode "$FOCUS"
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # ===============================================================
 # WINDOW RESIZE
@@ -589,7 +638,7 @@ bindcode $mod+Shift+58 mode $workspaces_monitors
 
 # Gaps
 gaps inner 25
-gaps outer 30
+gaps outer 15
 smart_gaps on
 
 # ===============================================================
@@ -651,11 +700,13 @@ client.placeholder        $color_unused          $color_normal_black    $color_u
 # AUTOSTART
 # ===============================================================
 
+exec_always --no-startup-id "(pgrep -x mpd && killall -q mpd) ; (mpd &)"
+
 exec_always --no-startup-id "pgrep -x firefox && killall -q firefox"
 exec_always --no-startup-id "pgrep -x chromium && killall -q chromium"
 
 exec_always --no-startup-id "(pgrep -x dunst && killall -qw dunst) ; (dunst &)"
-exec_always --no-startup-id "(pgrep -x compton && killall -qw compton) ; compton -bc --config ~/.config/compton.conf &"
+#exec_always --no-startup-id "(pgrep -x compton && killall -qw compton) ; compton -bc --config ~/.config/compton.conf &"
 exec_always --no-startup-id "(pgrep -x polybar && killall -qw polybar) ; (polybar -q top &) ; (polybar -q bottom &)"
 
 #exec_always --no-startup-id "(pgrep -x conky && killall -qw conky) ; (conky -q -c ~/.config/conky/conky.conf &)"
@@ -671,6 +722,11 @@ exec --no-startup-id setxkbmap -layout "tr,us" -option "grp:alt_caps_toggle" &
 
 exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/default.jpg &
 
+exec --no-startup-id "mpc pause &"
+exec --no-startup-id "mpc clear &"
+exec --no-startup-id "mpc add https://listen.radyofenomen.com/fenomen/256/icecast.audio &"
+
+#exec --no-startup-id gebaard -b
 #exec --no-startup-id xrandr --dpi 144
 #exec --no-startup-id /usr/bin/blueman-applet
 #exec --no-startup-id discord

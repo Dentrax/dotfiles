@@ -1,5 +1,5 @@
 # Aliases
-function mkcd() { mkdir -p $1 && cd $1 }
+function mkcd() { mkdir -pv $1 && cd $1 }
 function cdf() { cd *$1*/ } # stolen from @topfunky
 
 # Activate the closest virtualenv by looking in parent directories.

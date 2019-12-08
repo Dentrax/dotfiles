@@ -14,6 +14,9 @@ alias egrep='egrep --color=auto'
 alias pg='ps -Af | grep $1'
 alias hist='history | grep'
 
+# ncdu
+alias ncdu="ncdu --color dark"
+
 alias quote="~/.config/conky/sidekick/res/quote-offline"
 alias quote-online="~/.config/conky/sidekick/res/quote-online"
 alias downmp3='f() { youtube-dl -o "~/Music/%(title)s.%(ext)s" --extract-audio --audio-format mp3 $1 };f'
@@ -23,12 +26,13 @@ alias amx_add="sudo pacman -S"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-alias 'rm -rf /*'=rm_WTF
-alias 'echo test'=rm_WTF
-
 # alias fixes
 alias sudo='sudo -ES '
 alias watch='watch '
+
+# xset
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
 
 # misc
 #alias df='df -h -T | grep -v tmpfs'
@@ -40,7 +44,6 @@ alias c='clear'
 alias r='tput reset'
 alias cat='bat '
 alias q="exit"
-#alias l="/usr/bin/ls "
 alias tls='/usr/bin/ls -lah | lolcat'
 alias ls="exa --git --group-directories-first -lahGFm"
 alias l="lsd -a"
@@ -54,17 +57,11 @@ alias gg='go get -u -v '
 # Git
 alias gito='chromium https://github.$(git config remote.origin.url | cut -f2 -d. | tr ':' /)'
 alias gitl='git log --all --decorate --oneline --graph'
+alias gits='du -sh .git; git count-objects -v; git-sizer --verbose'
 
 # Upload
 fup() {
     [[ "$1" ]] || { echo "Error: Missing file" >&2; return 1; }
     curl -F "file=@$1" "https://0x0.st"
-}
-
-rm_WTF() {
-   echo "WTF BRO?" >&2
-   echo "Seriously?" >&2
-   echo 'WHAT WERE YOU THINKING!?!?!' >&2
-   sleep 3
 }
 

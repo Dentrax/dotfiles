@@ -9,7 +9,7 @@ ssh_with_color_and_term() {
   bg_color_reset
   return $retval
 }
-compdef ssh_with_color_and_term=ssh
+#compdef ssh_with_color_and_term=ssh
 
 bg_color_reset() {
   printf '\033]11;#282828\007'

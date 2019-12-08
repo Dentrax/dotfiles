@@ -17,5 +17,3 @@ date +%A%n%x | figlet &&
 neofetch &&
 sleep 1 &&
 startx ~/.xinitrc i3
-
-export PATH="$HOME/.cargo/bin:$PATH"
